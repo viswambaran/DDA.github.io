@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 7 Model Evaluation for Regression and Classification | Module Notes</title>
+  <meta name="description" content="Module notes for Data Driven Analytics." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 7 Model Evaluation for Regression and Classification | Module Notes" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Module notes for Data Driven Analytics." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 7 Model Evaluation for Regression and Classification | Module Notes" />
+  
+  <meta name="twitter:description" content="Module notes for Data Driven Analytics." />
+  
+
+<meta name="author" content="Dylan Viswambaran" />
+
+
+<meta name="date" content="2022-06-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probabilistic-classifiers-and-gradient-descent.html"/>
+<link rel="next" href="advanced-statistical-learning-models.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Driven Analytics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction-to-data-driven-analytics.html"><a href="introduction-to-data-driven-analytics.html"><i class="fa fa-check"></i><b>1</b> Introduction to Data Driven Analytics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-data-driven-analytics.html"><a href="introduction-to-data-driven-analytics.html#data-structures-in-python"><i class="fa fa-check"></i><b>1.1</b> Data Structures in Python</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-data-driven-analytics.html"><a href="introduction-to-data-driven-analytics.html#structured-vs-unstructured-data"><i class="fa fa-check"></i><b>1.2</b> Structured vs Unstructured data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html"><i class="fa fa-check"></i><b>2</b> Introduction to Data Driven Pipelines</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#example-of-a-data-driven-pipeline-using-the-iris-dataset"><i class="fa fa-check"></i>Example of a data driven pipeline using the iris dataset</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#data-acquisition"><i class="fa fa-check"></i>Data acquisition</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#data-cleaning"><i class="fa fa-check"></i>Data cleaning</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#data-exploration"><i class="fa fa-check"></i>Data exploration</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#data-modelling"><i class="fa fa-check"></i>Data modelling</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#data-visualisation"><i class="fa fa-check"></i>Data visualisation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#data-cleaning-1"><i class="fa fa-check"></i><b>2.1</b> Data cleaning</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-data-driven-pipelines.html"><a href="introduction-to-data-driven-pipelines.html#how-do-we-clean-data"><i class="fa fa-check"></i>How do we clean data?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html"><i class="fa fa-check"></i><b>3</b> Classification with K-Nearest Neighbours (KNN)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#key-information"><i class="fa fa-check"></i><b>3.1</b> Key information</a></li>
+<li class="chapter" data-level="3.2" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#advantages-and-disadvantages-of-using-the-knn-model"><i class="fa fa-check"></i><b>3.2</b> Advantages and Disadvantages of using the KNN model</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#advantages"><i class="fa fa-check"></i><b>3.2.1</b> Advantages</a></li>
+<li class="chapter" data-level="3.2.2" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#disadvantages"><i class="fa fa-check"></i><b>3.2.2</b> Disadvantages</a></li>
+<li class="chapter" data-level="3.2.3" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#things-to-guide-you-as-you-choose-the-value-of-k"><i class="fa fa-check"></i><b>3.2.3</b> Things to guide you as you choose the value of K</a></li>
+<li class="chapter" data-level="3.2.4" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#alternate-distance-metrics-to-euclidean"><i class="fa fa-check"></i><b>3.2.4</b> Alternate distance metrics to Euclidean</a></li>
+<li class="chapter" data-level="3.2.5" data-path="classification-with-k-nearest-neighbours-knn.html"><a href="classification-with-k-nearest-neighbours-knn.html#knn-code-example"><i class="fa fa-check"></i><b>3.2.5</b> KNN code example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="classification-with-logistic-regression.html"><a href="classification-with-logistic-regression.html"><i class="fa fa-check"></i><b>4</b> Classification with Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="classification-with-logistic-regression.html"><a href="classification-with-logistic-regression.html#logistic-regression-assumptions"><i class="fa fa-check"></i><b>4.0.1</b> Logistic regression assumptions</a></li>
+<li class="chapter" data-level="4.0.2" data-path="classification-with-logistic-regression.html"><a href="classification-with-logistic-regression.html#advantages-and-disadvantages-of-using-logistic-regression"><i class="fa fa-check"></i><b>4.0.2</b> Advantages and Disadvantages of using Logistic Regression</a></li>
+<li class="chapter" data-level="4.0.3" data-path="classification-with-logistic-regression.html"><a href="classification-with-logistic-regression.html#code-example-using-logistic-regression"><i class="fa fa-check"></i><b>4.0.3</b> Code example using Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html"><i class="fa fa-check"></i><b>5</b> Linear &amp; Polynomial Regression</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html#linear-regression"><i class="fa fa-check"></i><b>5.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html#assumptions"><i class="fa fa-check"></i><b>5.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.3" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html#classification-vs-regression"><i class="fa fa-check"></i><b>5.3</b> Classification vs Regression</a></li>
+<li class="chapter" data-level="5.4" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html#code-example-of-linear-regression"><i class="fa fa-check"></i><b>5.4</b> Code example of Linear Regression</a></li>
+<li class="chapter" data-level="5.5" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html#polynomial-regression"><i class="fa fa-check"></i><b>5.5</b> Polynomial Regression</a></li>
+<li class="chapter" data-level="5.6" data-path="linear-polynomial-regression.html"><a href="linear-polynomial-regression.html#code-example-with-polynomial-regression"><i class="fa fa-check"></i><b>5.6</b> Code example with Polynomial regression</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html"><i class="fa fa-check"></i><b>6</b> Probabilistic Classifiers and Gradient Descent</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#naive-bayes-classification"><i class="fa fa-check"></i><b>6.1</b> Naive Bayes Classification</a></li>
+<li class="chapter" data-level="6.2" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#types-of-naive-bayes-classifier"><i class="fa fa-check"></i><b>6.2</b> Types of Naive Bayes Classifier</a></li>
+<li class="chapter" data-level="6.3" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#advantages-and-disadvantages-of-naive-bayes-classifers"><i class="fa fa-check"></i><b>6.3</b> Advantages and Disadvantages of Naive Bayes Classifers</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#advantages-2"><i class="fa fa-check"></i><b>6.3.1</b> Advantages</a></li>
+<li class="chapter" data-level="6.3.2" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#disadvantages-2"><i class="fa fa-check"></i><b>6.3.2</b> Disadvantages</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#multinomial-naive-bayes"><i class="fa fa-check"></i><b>6.4</b> Multinomial Naive Bayes</a></li>
+<li class="chapter" data-level="6.5" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#gradient-descent"><i class="fa fa-check"></i><b>6.5</b> Gradient Descent</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="probabilistic-classifiers-and-gradient-descent.html"><a href="probabilistic-classifiers-and-gradient-descent.html#types-of-gradient-descent"><i class="fa fa-check"></i><b>6.5.1</b> Types of Gradient Descent</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html"><i class="fa fa-check"></i><b>7</b> Model Evaluation for Regression and Classification</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#what-is-model-evaluation"><i class="fa fa-check"></i><b>7.1</b> What is Model Evaluation?</a></li>
+<li class="chapter" data-level="7.2" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#methods"><i class="fa fa-check"></i><b>7.2</b> Methods</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#issues-with-train-test-split"><i class="fa fa-check"></i><b>7.2.1</b> Issues with train-test-split</a></li>
+<li class="chapter" data-level="7.2.2" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#cross-validation"><i class="fa fa-check"></i><b>7.2.2</b> Cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#measuring-model-performance"><i class="fa fa-check"></i><b>7.3</b> Measuring Model Performance</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#variance-and-sensitivity"><i class="fa fa-check"></i><b>7.3.1</b> Variance and sensitivity</a></li>
+<li class="chapter" data-level="7.3.2" data-path="model-evaluation-for-regression-and-classification.html"><a href="model-evaluation-for-regression-and-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>7.3.2</b> Confusion Matrix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="advanced-statistical-learning-models.html"><a href="advanced-statistical-learning-models.html"><i class="fa fa-check"></i><b>8</b> Advanced Statistical Learning Models</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="advanced-statistical-learning-models.html"><a href="advanced-statistical-learning-models.html#unsupervised-learning"><i class="fa fa-check"></i><b>8.1</b> Unsupervised learning</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="advanced-statistical-learning-models.html"><a href="advanced-statistical-learning-models.html#clustering"><i class="fa fa-check"></i><b>8.1.1</b> Clustering</a></li>
+<li class="chapter" data-level="8.1.2" data-path="advanced-statistical-learning-models.html"><a href="advanced-statistical-learning-models.html#decision-trees"><i class="fa fa-check"></i><b>8.1.2</b> Decision Trees</a></li>
+<li class="chapter" data-level="8.1.3" data-path="advanced-statistical-learning-models.html"><a href="advanced-statistical-learning-models.html#principal-component-analysis"><i class="fa fa-check"></i><b>8.1.3</b> Principal Component Analysis</a></li>
+<li class="chapter" data-level="8.1.4" data-path="advanced-statistical-learning-models.html"><a href="advanced-statistical-learning-models.html#support-vector-machine"><i class="fa fa-check"></i><b>8.1.4</b> Support Vector Machine</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="relational-database-systems.html"><a href="relational-database-systems.html"><i class="fa fa-check"></i><b>9</b> Relational Database Systems</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="relational-database-systems.html"><a href="relational-database-systems.html#sqlite"><i class="fa fa-check"></i><b>9.1</b> SQLite</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="relational-database-systems.html"><a href="relational-database-systems.html#advantages-and-disadvantages-1"><i class="fa fa-check"></i><b>9.1.1</b> Advantages and Disadvantages</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Module Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-evaluation-for-regression-and-classification" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Module 7</span> Model Evaluation for Regression and Classification<a href="model-evaluation-for-regression-and-classification.html#model-evaluation-for-regression-and-classification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-model-evaluation" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> What is Model Evaluation?<a href="model-evaluation-for-regression-and-classification.html#what-is-model-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>It helps to find the best model that represents our data and how well the chosen model will work in the future.</p></li>
+<li><p>It is the process through which we quantify the quality of a systems predictions.<br />
+</p></li>
+<li><p>We measure the trained model performance on the new and independent dataset.</p></li>
+</ul>
+<blockquote>
+<p>Generalisation refers to the models ability to adapt properly to nw and unseen data, drawn from the same distribution as the one used to create the model.</p>
+</blockquote>
+</div>
+<div id="methods" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Methods<a href="model-evaluation-for-regression-and-classification.html#methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Train and test
+<ul>
+<li>Train the model on the entire dataset<br />
+</li>
+<li>Test the model on the same dataset
+<ul>
+<li>This shows us how well the model performed on same data<br />
+</li>
+<li>We can check if the predictions were actually correct or not</li>
+</ul></li>
+</ul></li>
+<li>Train - Test - Split
+<ul>
+<li>Test to make predictions on data that you do not use to train the model</li>
+<li>Since our training model uses part of our dataset the testing phase is more realistic
+<ul>
+<li>Better simulation how a model is likely to perform on out of sample data<br />
+</li>
+<li>We have the real values of testing data so we can check how the model performed</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="issues-with-train-test-split" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Issues with train-test-split<a href="model-evaluation-for-regression-and-classification.html#issues-with-train-test-split" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>The results may be highly bias if a subset of our dataset is skewed towards a certain group or class.<br />
+</li>
+<li>This results in overfitting which we are trying to avoid.</li>
+</ul>
+</div>
+<div id="cross-validation" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Cross validation<a href="model-evaluation-for-regression-and-classification.html#cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Similar to train/test split but applied to more subsets of data.<br />
+</li>
+<li>Splits data into k subsets and train on k-1 of those subsets.<br />
+</li>
+<li>Use the last subset for testing
+<ul>
+<li>Process repeated for each subset</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="measuring-model-performance" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Measuring Model Performance<a href="model-evaluation-for-regression-and-classification.html#measuring-model-performance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="variance-and-sensitivity" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Variance and sensitivity<a href="model-evaluation-for-regression-and-classification.html#variance-and-sensitivity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Variance is a type of error that occurs due to a models sensitivity to small fluctations in the training set.</p></li>
+<li><p>High variance would cause and algorithm to model the noise in the training set aka <strong>overfitting</strong>.</p></li>
+<li><p>We need to find the balance between variance and sensitivity (low bias and low variance)</p>
+<ul>
+<li>High bias can cause the algorithm to miss relationships between features and target outputs.</li>
+</ul></li>
+</ul>
+</div>
+<div id="confusion-matrix" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Confusion Matrix<a href="model-evaluation-for-regression-and-classification.html#confusion-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>A Confusion Matrix is a performance measurement for a statistical learning classification problem where output can be two or more classes. It is a table with 4 different combinations of predicted and actual values.</p>
+</blockquote>
+<ul>
+<li><p><strong>True Positive</strong> is an outcome where the model correctly predicts a positive class.</p></li>
+<li><p><strong>True Negative</strong> is an outcome where the model correctly predicts the negative class.</p></li>
+<li><p><strong>False Positive</strong> is an outcome where the model incorrectly predicts the positive outcome.</p></li>
+<li><p><strong>False Negative</strong> is an outcome where the model incorrectly predicts the negative outcome.</p></li>
+</ul>
+<p>###Sensitivity vs Specificity</p>
+<ul>
+<li>Sensitivity is the metric that evaluates a models ability to predict true positives of each category.<br />
+<span class="math display">\[
+Sensitivity = \frac{True Positives}{True Positives + False Negatives}
+\]</span></li>
+<li>Specificity is the metric that evaluates a models ability to predict true negatives of each category.<br />
+<span class="math display">\[
+Specificity = \frac{True Negatives}{True Negatives + False Positives}
+\]</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probabilistic-classifiers-and-gradient-descent.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="advanced-statistical-learning-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-Module7.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
