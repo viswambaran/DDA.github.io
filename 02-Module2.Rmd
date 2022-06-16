@@ -1,0 +1,67 @@
+# Introduction to Data Driven Pipelines
+
+> A data pipeline is a means of transforming or moving data from one state to another, including data schemas and systems. Along the way, data is transformed and optimized, arriving in a state that can be analyzed and used to develop business insights.
+
+The steps of a Data Driven Pipeline include:  
+
+- Data acquisition  
+- Data cleaning  
+- Data exploration  
+- Data modeling  
+- Data visualisation  
+
+## Example of a data driven pipeline using the iris dataset {.unnumbered}
+
+### Data acquisition {.unnumbered}
+
+Firstly, we would load the raw data (iris dataset) into our python script. The data format can 
+be structured, un-structured or semi-structured. In our case, the data we are working with is 
+structured.  
+
+
+### Data cleaning {.unnumbered}
+Examine the data (and clean if necessary)
+During the data cleaning stage, we would remove any incorrect, corrupted, incorrectly 
+formatted, duplicated or incomplete data in a dataset. We will remove duplicated or irrelevant 
+observations to minimise distraction from the primary target and to create a more performant 
+dataset. Structural errors will be fixed by removing an N/A values, strange naming 
+conventions or typos. Missing data will be dealt with by the process of transformation. We 
+will also filter and unwanted outliers to help the performance of the data we are working with 
+and to ensure the data is accepted by algorithms.  
+
+At the end of the cleaning process, we will explore the data to validate that the results make sense.  
+
+### Data exploration {.unnumbered}
+
+Once the data is in the correct format, exploratory analysis will be performed to make sure it meets the project requirements. Exploratory techniques include data schema, feature analysis, checking for outliers and studying distribution. 
+We will identify the target and feature variables. Distribution features such as a distribution curve, correlation matrix or boxplot can give a good indication of the structure of the dataset. This can help identify outliers and give an indication of the skew. If the data is skewed it will need to be transformed so it follows a normal distribution.   
+It is vital that the variables are correlated, and non-linear features are transformed or else the model would not perform well.
+
+### Data modelling {.unnumbered}
+Use the python library (scikit-learn) to create a KNN model using our dataset (the model will ‘learn’ based on our data sample).  
+
+Make predictions for unknown data (predict the flower class). At this stage we can implement our regression, classification or clustering models.  
+
+### Data visualisation {.unnumbered}
+During the data visualisation stage we will use the visualisation packages matplotlib and seaborn.  
+Benefits of a data driven pipeline are that it can analyse large amounts of data. They also reduce manual processes and allow for automation to occur when data flows from one state to another. They are helpful to make real-time, faster, data-driven decisions.
+
+## Data cleaning
+
+> Data cleaning is the process of fixing or removing incorrect, corrupted, incorrectly formatted, duplicate, or incomplete data within a dataset. When combining multiple data sources, there are many opportunities for data to be duplicated or mislabeled. If data is incorrect, outcomes and algorithms are unreliable, even though they may look correct. There is no one absolute way to prescribe the exact steps in the data cleaning process because the processes will vary from dataset to dataset. But it is crucial to establish a template for your data cleaning process so you know you are doing it the right way every time.  
+
+### How do we clean data?{.unnumbered}
+
+We can follow the following steps as discussed in Data cleaning: The benefits and steps to creating and using clean data:
+
+**Step 1:** Remove duplicate or irrelevant observations: This can make analysis more efficient and minimize distraction from your primary target—as well as create a more manageable and more performant dataset.
+
+**Step 2:** Fix structural errors: Structural errors are when you measure or transfer data and notice strange naming conventions, typos, or incorrect capitalization. For example, you may find “N/A” and “Not Applicable” both appear, but they should be analyzed as the same category.
+
+**Step 3:** Filter unwanted outliers:  Often, there will be one-off observations where, at a glance, they do not appear to fit within the data you are analyzing. If you have a legitimate reason to remove an outlier, like improper data-entry, doing so will help the performance of the data you are working with. 
+
+**Step 4:** Handle missing data: You can’t ignore missing data because many algorithms will not accept missing values. There are a couple of ways to deal with missing data. Neither is optimal, but both can be considered.
+
+**Step 5:** Validate and QA: At the end of the data cleaning process, you should be able to explore the data to validate that the results make sense.  
+
+

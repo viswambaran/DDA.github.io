@@ -1,0 +1,112 @@
+# Probabilistic Classifiers and Gradient Descent
+
+## Naive Bayes Classification 
+
+>Naive Bayes is a classification technique based on Bayes’ Theorem with an assumption of independence among predictors. In simple terms, a Naive Bayes classifier assumes that the presence of a particular feature in a class is unrelated to the presence of any other feature.  
+
+$$
+P(A|B) = \frac{P(B|A) P(A)}{P(B)}
+$$
+
+** Learning Rate ** 
+
+>The size of these steps is called the learning rate. With a high learning rate we can cover more ground each step, but we risk overshooting the lowest point since the slope of the hill is constantly changing. With a very low learning rate, we can confidently move in the direction of the negative gradient since we are recalculating it so frequently. A low learning rate is more precise, but calculating the gradient is time-consuming, so it will take us a very long time to get to the bottom.  
+
+** Cost Function **
+
+>A Loss Functions tells us “how good” our model is at making predictions for a given set of parameters. The cost function has its own curve and its own gradients. The slope of this curve tells us how to update our parameters to make the model more accurate.  
+
+
+
+## Types of Naive Bayes Classifier 
+
+**Multinomial Naive Bayes:**  
+
+This is mostly used for document classification problem, i.e whether a document belongs to the category of sports, politics, technology etc. The features/predictors used by the classifier are the frequency of the words present in the document.  
+
+**Bernoulli Naive Bayes:**  
+
+This is similar to the multinomial naive bayes but the predictors are boolean variables. The parameters that we use to predict the class variable take up only values yes or no, for example if a word occurs in the text or not.  
+
+**Gaussian Naive Bayes:**  
+When the predictors take up a continuous value and are not discrete, we assume that these values are sampled from a gaussian distribution.
+
+
+
+## Advantages and Disadvantages of Naive Bayes Classifers
+
+### Advantages 
+
+- **Simple to Implement.** The conditional probabilities are easy to evaluate.  
+- **Very fast** – no iterations since the probabilities can be directly computed. So this technique is useful where speed of training is important.   
+- **Good classification results** - If the conditional Independence assumption holds, it could give great results.  
+
+### Disadvantages 
+
+- Assumptions for class conditionals are independence  
+- Practically, dependencies exist among variables which cannot be modelled by Naive Bayes. e.g. patient profile with symptoms.  
+
+## Multinomial Naive Bayes  
+
+>Multinomial Naive Bayes algorithm is a probabilistic learning method that is mostly used in Natural Language Processing (NLP). The algorithm is based on the Bayes theorem and predicts the tag of a text such as a piece of email or newspaper article. It calculates the probability of each tag for a given sample and then gives the tag with the highest probability as output.
+
+
+## Gradient Descent
+
+>Gradient descent is an optimization algorithm that's used when training a machine learning model. It's based on a convex function and tweaks its parameters iteratively to minimize a given function to its local minimum. 
+
+### Types of Gradient Descent 
+
+#### Batch Gradient Descent
+
+Batch gradient descent sums the error for each point in a training set, updating the model only after all training examples have been evaluated. This process referred to as a training epoch.
+
+While this batching provides computation efficiency, it can still have a long processing time for large training datasets as it still needs to store all of the data into memory. Batch gradient descent also usually produces a stable error gradient and convergence, but sometimes that convergence point isn’t the most ideal, finding the local minimum versus the global one.  
+
+##### Advantages  
+
+- More stable convergence and error gradient than Stochastic Gradient descent  
+- Embraces the benefits of vectorization  
+- A more direct path is taken towards the minimum  
+- Computationally efficient since updates are required after the run of an epoch  
+
+##### Disadvantages
+
+- Can converge at local minima and saddle points  
+- Slower learning since an update is performed only after we go through all observations  
+
+
+#### Stochastic Gradient Descent  
+
+Stochastic gradient descent (SGD) runs a training epoch for each example within the dataset and it updates each training example's parameters one at a time. Since you only need to hold one training example, they are easier to store in memory. While these frequent updates can offer more detail and speed, it can result in losses in computational efficiency when compared to batch gradient descent. Its frequent updates can result in noisy gradients, but this can also be helpful in escaping the local minimum and finding the global one.  
+
+##### Advantages 
+
+- Only a single observation is being processed by the network so it is easier to fit into memory  
+- May (likely) to reach near the minimum (and begin to oscillate) faster than Batch Gradient Descent on a large dataset  
+- The frequent updates create plenty of oscillations which can be helpful for getting out of local minimums.  
+
+
+##### Disadvantages 
+
+- Can veer off in the wrong direction due to frequent updates  
+- Lose the benefits of vectorization since we process one observation per time  
+- Frequent updates are computationally expensive due to using all resources for processing one training sample at a time  
+
+
+#### Mini-batch Gradient Descent
+
+Mini-batch gradient descent combines concepts from both batch gradient descent and stochastic gradient descent. It splits the training dataset into small batch sizes and performs updates on each of those batches. This approach strikes a balance between the computational efficiency of batch gradient descent and the speed of stochastic gradient descent. 
+
+##### Advantages 
+
+- Convergence is more stable than Stochastic Gradient Descent  
+- Computationally efficient  
+- Fast Learning since we perform more updates  
+
+##### Disadvantages 
+
+- We have to configure the Mini-Batch size hyperparameter   
+
+
+

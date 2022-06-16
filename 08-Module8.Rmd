@@ -1,0 +1,76 @@
+# Advanced Statistical Learning Models
+
+
+## Unsupervised learning 
+
+>Unsupervised learning, also known as unsupervised machine learning, uses machine learning algorithms to analyze and cluster unlabeled datasets. These algorithms discover hidden patterns or data groupings without the need for human intervention. Its ability to discover similarities and differences in information make it the ideal solution for exploratory data analysis, cross-selling strategies, customer segmentation, and image recognition.  
+
+- The data has no target attribute  
+
+- Explore the data to find intrinsic structures in them.  
+  - Grouping similar instances together.  
+- Draws inferences from datasets without labels  
+- Best if you arent sure what the target variable should be.  
+
+We can use `Clustering` to group items together based on similiarity. 
+
+### Clustering 
+
+>Clustering is a data mining technique that groups unlabeled data based on their similarities or differences. Clustering algorithms are used to process raw, unclassified data objects into groups represented by structures or patterns in the information. Clustering algorithms can be categorized into a few types: exclusive, overlapping, hierarchical, and probabilistic.
+
+#### K-Means Clustering 
+
+- K-Means is a **partitional clustering algorithm**
+- Clustering is a technique for finding similarity groups in data called clusters.  
+   - Groups data instances that are similar to each other in one cluster and data instances that are very different from each other into different clusters.   
+
+- K-Means is very efficient at clustering
+- Tries to find the centre of each cluster and assign each instance to the closest cluster.  
+
+##### How does it work?
+
+- Randomly choose k data points to be the initial centroids, cluster centres.  
+- Assign each data point to the closest centroid  
+- Re-compute the centroids using the current cluster memberships  
+- If a convergence criterion is not met repeat step 2.  
+
+When does the model stop?  
+
+- No or min re-assignments of data points to the different clusters.  
+- No or min change of centroids  
+- Minimum decrease in the sum of squared error (SSE)
+
+##### Advantages and Disadvantages
+###### Advantages 
+
+- It is simple, highly flexible, and efficient. The simplicity of k-means makes it easy to explain the results in contrast to Neural Networks.  
+- The flexibility of k-means allows for easy adjustment if there are problems.  
+- The efficiency of k-means implies that the algorithm is good at segmenting a dataset.  
+- An instance can change cluster (move to another cluster) when the centroids are recomputed  
+- Easy to interpret the clustering results.
+
+###### Disadvantages 
+- It does not allow to develop the most optimal set of clusters and the number of clusters must be decided before the analysis. How many clusters to include is left at the discretion of the researcher. This involves a combination of common sense, domain knowledge, and statistical tools. Too many clusters tell you nothing because of the groups becoming very small and there are too many of them. There are statistical tools that measure within-group homogeneity and group heterogeneity. There are methods like the elbow method to decide the value of k. Additionally, there is a technique called a dendrogram. The results of a dendrogram analysis provide a recommendation of how many clusters to use. However, calculating a dendrogram for a large dataset could potentially crash a computer due to the computational load and the limits of RAM.  
+
+- When doing the analysis, the k-means algorithm will randomly select several different places from which to develop clusters. This can be good or bad depending on where the algorithm chooses to begin at. From there, the centre of the clusters is recalculated until an adequate "centre'' is found for the number of clusters requested.  
+
+- The order of the data has an impact on the final results.
+
+
+### Decision Trees
+
+>A decision tree is a flowchart-like structure in which each internal node represents a test on a feature (e.g. whether a coin flip comes up heads or tails). Each leaf/node represents a class label (decision taken after computing all features) and branches represent conjunctions of features that lead to those class labels. The paths from the root to the leaf represent classification rules. 
+
+### Principal Component Analysis
+
+>Principal Component Analysis, or PCA, is a dimensionality-reduction method that is often used to reduce the dimensionality of large data sets, by transforming a large set of variables into a smaller one that still contains most of the information in the large set.
+
+
+### Support Vector Machine 
+
+>Support Vector Machine or SVM is one of the most popular Supervised Learning algorithms, which is used for Classification as well as Regression problems. However, primarily, it is used for Classification problems in Machine Learning.  
+The goal of the SVM algorithm is to create the best line or decision boundary that can segregate n-dimensional space into classes so that we can easily put the new data point in the correct category in the future. This best decision boundary is called a hyperplane.  
+SVM chooses the extreme points/vectors that help in creating the hyperplane. These extreme cases are called support vectors, and hence the algorithm is termed a Support Vector Machine. Consider the below diagram in which there are two different categories that are classified using a decision boundary or hyperplane
+
+
+

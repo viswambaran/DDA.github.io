@@ -1,0 +1,22 @@
+# Relational Database Systems
+
+
+## SQLite
+
+>SQLite is a popular open source SQL database. It can store an entire database in a single file. One of the most significant advantages this provides is that all of the data can be stored locally without having to connect your database to a server.  
+SQLite is not directly comparable to client/server SQL database engines such as MySQL, Oracle, PostgreSQL, or SQL Server since SQLite is trying to solve a different problem.  
+Client/server SQL database engines strive to implement a shared repository of enterprise data. They emphasize scalability, concurrency, centralization, and control. SQLite strives to provide local data storage for individual applications and devices. SQLite emphasizes economy, efficiency, reliability, independence, and simplicity 
+
+### Advantages and Disadvantages 
+#### Advantages 
+
+- Lightweight database and easy to implement  
+- Good community support online  
+- Simple to use  
+
+#### Disadvantages  
+
+- Not scalable  
+- Not suitable for large applications  
+- Does not support concurrent transactions on data  
+- Speed to query may be reduced if you have a large data set  

@@ -1,0 +1,154 @@
+# Classification with Logistic Regression
+
+
+
+>Logistic regression is a classification algorithm. It is used to predict a binary/ multinomial outcome based on a set of independent variables. The logistic regression model uses the Sigmoid function that is based on an estimated probability. 
+
+### Logistic regression assumptions
+
+- **The dependent variable is binary or dichotomous—**i.e. It fits into one of two clear-cut categories. This applies to binary logistic regression, which is the type of logistic regression we’ve discussed so far. We’ll explore some other types of logistic regression in section five.  
+- **There should be no, or very little, multicollinearity between the predictor variables—**in other words, the predictor variables (or the independent variables) should be independent of each other. This means that there should not be a high correlation between the independent variables.  
+- **The independent variables should be linearly related to the log odds.**  
+- **Logistic regression requires fairly large sample sizes—**the larger the sample size, the more reliable (and powerful) you can expect the results of your analysis to be.
+
+### Advantages and Disadvantages of using Logistic Regression 
+#### Advantages 
+
+- **Logistic regression is much easier to implement than other methods, especially in the context of machine learning:**  Logistic regression is easier to train and implement as compared to other methods.  
+
+- **Logistic regression works well for cases where the dataset is linearly separable:** A dataset is said to be linearly separable if it is possible to draw a straight line that can separate the two classes of data from each other. Logistic regression is used when your Y variable can take only two values, and  if the data is linearly separable, it is more efficient to classify it into two separate classes.  
+
+- **Logistic regression provides useful insights:** Logistic regression not only gives a measure of how relevant an independent variable is (i.e. the (coefficient size), but also tells us about the direction of the relationship (positive or negative). Two variables are said to have a positive association when an increase in the value of one variable also increases the value of the other variable.  
+
+
+#### Disadvantages 
+
+- **Logistic regression fails to predict a continuous outcome.**  
+
+- **Logistic regression assumes linearity between the predicted (dependent) variable and the predictor (independent) variables.** Why is this a limitation? In the real world, it is highly unlikely that the observations are linearly separable. Let’s imagine you want to classify the iris plant into one of two families: sentosa or versicolor. In order to distinguish between the two categories, you’re going by petal size and sepal size. You want to create an algorithm to classify the iris plant, but there’s actually no clear distinction—a petal size of 2cm could qualify the plant for both the sentosa and versicolor categories. So, while linearly separable data is the assumption for logistic regression, in reality, it’s not always truly possible.  
+
+- **Logistic regression may not be accurate if the sample size is too small.** If the sample size is on the small side, the model produced by logistic regression is based on a smaller number of actual observations. This can result in overfitting. In statistics, overfitting is a  modeling error which occurs when the model is too closely fit to a limited set of data because of a lack of training data. Or, in other words, there is not enough input data available for the model to find patterns in it. In this case, the model is not able to accurately predict the outcomes of a new or future dataset.  
+
+### Code example using Logistic Regression 
+
+```
+# **PART 1: Using Logistic Regression in the Iris dataset to predict a flower's 
+variety (Classification problem)**
+**Question 1:** Load the *Iris.csv* file in the Colab and *read* it as a dataframe.
+"""
+# Provide your solution here
+import pandas as pd
+iris_data = pd.read_csv('Iris.csv')
+iris_data
+"""**Question 2:** Examine the data schema by printing the *types* of data for each
+column. Provide the answer for each question."""
+# Provide your solution here
+iris_data.dtypes
+# How many columns do we have? __5__
+# What type is the sepal.length column? __String__
+"""**Question 3:** Continue examining the dataset, let us focus on the numerical 
+data, columns include:
+*  sepal.length -> float64
+*  sepal.width -> float64
+*  petal.length -> float64
+*  petal.width -> float64
+Describe the dataset and answer the following questions
+"""
+# Provide your solution here
+iris_data.describe()
+"""**Question 4:** We will need to split our dataset into feature data **(X)** and 
+target data **(y)**.
+We will use the sepal length and width, and the petal length and width to predict a
+flower's class (variety).
+So, the feature data is:
+*  sepal.length
+*  sepal.width
+*  petal.length
+*  petal.width
+The target data is:
+*  variety
+Extract the data for the feature variables (and associated columns) and store it in
+a new dataframe called **iris_data_feature_data**. This will be our **X** variable.
+"""
+# Provide your solution here
+iris_data_feature_data = 
+iris_data[['sepal.length','sepal.width','petal.length','petal.width']]
+X = iris_data_feature_data
+"""**Question 5:** Now we will need to create the **iris_data_feature_target** 
+dataframe. The new dataframe will store only the target values that is the variety 
+column. This will be our **y** variable."""
+# Provide your solution here
+iris_data_feature_target = iris_data[['variety']]
+y = iris_data_feature_target
+"""**Question 6:** Create a new *LogisticRegression model* and then fit the **X** 
+and **y** dataframes that we just created. Make sure you revise the class slides to
+create your model.
+**Do not worry about the warnings.**
+"""
+# Provide your solution here
+from sklearn.linear_model import LogisticRegression
+logreg = LogisticRegression(max_iter=200)
+logreg.fit(X,y)
+"""**Question 7:** Our model is now ready to use, test your model using the 
+following data to predict a flower's class:
+**Set 1**
+*  sepal.length: 4.5
+*  sepal.width: 3.2
+*  petal.length: 1.1
+*  petal.width: 0.4
+**Set 2**
+*  sepal.length: 6.9
+*  sepal.width: 3.0
+*  petal.length: 4.6
+*  petal.width: 1.5
+**Set 3**
+*  sepal.length: 6
+*  sepal.width: 3.5
+*  petal.length: 5.5
+*  petal.width: 2
+"""
+# Provide your solution here
+# Prediction for set 1
+print(logreg.predict([[4.5, 3.2, 1.1, 0.4]]))
+# Prediction for set 2
+print(logreg.predict([[6.9, 3.0, 4.6, 1.5]]))
+# Prediction for set 3
+print(logreg.predict([[6, 3.5, 5.5, 2]]))
+"""**Question 8:** What is the prediction of the KNN model for the same data sets? 
+Revise last week's exercises if needed.
+Create your KNN model and fit it using the **X** and **y** variables from the 
+previous step. Use the *KNeighborsClassifier* including 4 neighbors.
+"""
+# Provide your solution here
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=4)
+knn.fit(X, y)
+"""**Question 9:** Our KNN model is now ready to use, test your model using the 
+following data to predict a flower's class (same as in question 7):
+**Set 1**
+*  sepal.length: 4.5
+*  sepal.width: 3.2
+*  petal.length: 1.1
+*  petal.width: 0.4
+**Set 2**
+*  sepal.length: 6.9
+*  sepal.width: 3.0
+*  petal.length: 4.6
+*  petal.width: 1.5
+**Set 3**
+*  sepal.length: 6
+*  sepal.width: 3.5
+*  petal.length: 5.5
+*  petal.width: 2
+"""
+# Provide your solution here
+# Prediction for set 1
+print(knn.predict([[4.5, 3.2, 1.1, 0.4]]))
+# Prediction for set 2
+print(knn.predict([[6.9, 3.0, 4.6, 1.5]]))
+# Prediction for set 3
+print(knn.predict([[6, 3.5, 5.5, 2]]))
+"""**Question 10:** Compare the results between logistic regression and KNN."""
+# We have the same or different predictions?
+# __Same__!
+```

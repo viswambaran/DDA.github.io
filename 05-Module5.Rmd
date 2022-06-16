@@ -1,0 +1,236 @@
+# Linear & Polynomial Regression
+
+## Linear Regression 
+
+>Linear regression is a supervised learning algorithm that compares input (X) and output (Y) variables based on labeled data. It’s used for finding the relationship between the two variables and predicting future results based on past relationships.  
+
+Completing a simple linear regression on a set of data results in a line on a plot representing the relationship between the independent variable X and the dependent variable Y. The simple linear regression predicts the value of the dependent variable based on the independent variable.
+
+
+## Assumptions
+
+
+- **Linearity and additivity:** The expected value of the dependent variable is a straight-line function of the independent variable. The effects of different independent variables are additive to the expected value of the dependent variable.  **Check this using a scatterplot.**
+
+- **No significant outliers**: Outliers can have a negative effect on the regression analysis. 
+
+- **Statistical independence:** There is no correlation between consecutive errors when using time series data. The observations are independent of each other.  
+
+- **Homoscedasticity:** The errors have a constant variance in time compared to predictions and when compared to any independent variable.  
+
+- **Normality:** For a fixed value of X, Y values are distributed normally.  
+
+
+
+
+## Classification vs Regression  
+
+Differences:  
+
+- Regression output is continuous (numerical)  
+- Classification output is discrete (categorical)  
+
+## Code example of Linear Regression 
+
+```
+**Building a linear regression model**
+We’ll import the numpy and pandas library in the Jupyter notebook and read the data
+using pandas.
+"""
+import numpy as np
+import pandas as pd
+# Read the given CSV file, and view some sample records
+advertising = pd.read_csv("Company_data.csv")
+"""The dataset looks like this. Here our target variable is the Sales column."""
+advertising.head(10)
+"""Let’s perform some tasks to understand the data like shape, info, and 
+describe."""
+# Shape of our dataset
+advertising.shape
+# Info our dataset
+advertising.info()
+# Describe our dataset
+advertising.describe()
+"""Let’s now visualize the data using the matplolib and seaborn library. We’ll make
+a pairplot of all the columns and see which columns are the most correlated to 
+Sales."""
+# Import matplotlib and seaborn libraries to visualize the data
+import matplotlib.pyplot as plt 
+import seaborn as sns
+# Using pairplot we'll visualize the data for correlation
+sns.pairplot(advertising, x_vars=['TV', 'Radio','Newspaper'], 
+             y_vars='Sales', height=4, aspect=1, kind='scatter')
+plt.show()
+"""If we cannot determine the correlation using a scatter plot, we can use the 
+seaborn heatmap to visualize the data.
+"""
+# Visualizing the data using heatmap
+sns.heatmap(advertising.corr(), cmap="YlGnBu", annot = True)
+plt.show()
+"""As we can see from the above graphs, the TV column seems most correlated to 
+Sales.
+Let’s perform the simple linear regression model using TV as our feature variable.
+Equation of simple linear regression
+y = c + mX
+In our case:
+y = c + m * TV
+The m values are known as model coefficients or model parameters.
+We’ll perform simple linear regression in four steps.
+* Create X and y
+* Create Train and Test set
+* Train your model
+* Evaluate the model
+The independent variable represents X, and y represents the target variable in a 
+simple linear regression model.
+"""
+X = advertising[['TV']]
+y = advertising[['Sales']]
+"""We need to split our variables into training and testing sets. Using the 
+training set, we’ll build the model and perform the model on the testing set. We’ll
+divide the training and testing sets into a 7:3 ratio, respectively.
+We’ll split the data by importing train_test_split from the sklearn.model_selection
+library.
+"""
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X,y)
+"""To retrieve the intercept:
+"""
+print(regressor.intercept_)
+"""For retrieving the slope (coefficient of x):
+"""
+print(regressor.coef_)
+"""We can conlude that our model is:
+* y = 6.97 + 0.05 * TV
+That means that if we use TV=100, then:
+* y = 6.97 + 0.05 * 100 = 6.97 + 5 = 11.97
+Lets extract the first record e.g. record 0
+"""
+advertising.head(1)
+"""And now, let's try to see the prediction for **TV value: 230.1**, as we can see 
+our prediction is 19.73, that is close to 22.1"""
+y_pred = regressor.predict([[230.1]])
+y_pred
+```
+
+
+## Polynomial Regression 
+
+>Polynomial regression is a form of linear regression in which the relationship between the independent variable x and the dependent variable y is modelled as an nth degree polynomial. 
+
+- Polynomial Regression is a form of regression analysis in which the relationship between the independent variables and dependent variables are modelled in the nth degree polynomial.  
+
+- Polynomial Regression models are usually fitted with the method of least squares. The least-square method minimizes the variance of the coefficients, under the Gauss Markov Theorem.  
+
+- Polynomial Regression is a special case of Linear Regression where we fit the polynomial equation on the data with a curvilinear relationship between the dependent and independent variables.  
+
+
+## Code example with Polynomial regression 
+
+```
+
+# **PART 2: Using Polynomial Regression**
+**Question 1.1:** Load the *Years_salary_data.csv* file in the Colab and *read* it 
+as a dataframe.
+Print and examine the dataset.
+"""
+# Provide your solution here
+import pandas as pd
+data_ys = pd.read_csv('Years_salary_data.csv')
+data_ys.head()
+"""**Question 1.2:** Let's plot a scatterplot to examine the data."""
+sns.scatterplot(x='Years', y='Salary', data=data_ys)
+"""**Question 2:** Plot the years-salary data using a lmplot. Use in **x-axis** the
+**Years** and as **y-axis** the **Salary**. """
+# Provide your solution here
+sns.lmplot(x='Years', y='Salary', data=data_ys, height=10)
+"""**Question 3:** Create the **X (Years)** and **y (Salary)** variables of your 
+dataset."""
+# Provide your solution here
+X= data_ys[['Years']]
+y= data_ys[['Salary']]
+"""**Question 4:** Create the Linear Regression model. Fit **X** and **y**.
+"""
+# Provide your solution here
+from sklearn.linear_model import LinearRegression 
+lin = LinearRegression() 
+  
+lin.fit(X, y)
+"""**Question 5:** Create the Polynomial Regression model (degree=8). Fit X and y.
+Study and run the following code.
+"""
+# Fitting Polynomial Regression to the dataset 
+from sklearn.preprocessing import PolynomialFeatures 
+  
+poly = PolynomialFeatures(degree = 8) 
+X_poly = poly.fit_transform(X) 
+  
+poly.fit(X_poly, y) 
+lin2 = LinearRegression() 
+lin2.fit(X_poly, y)
+"""**Question 6:** Plot the Linear Regression model.
+ Study and run the following code. Is the Regression line a good fit?
+"""
+# Visualising the Linear Regression results 
+plt.scatter(X, y, color = 'blue') 
+  
+plt.plot(X, lin.predict(X), color = 'red') 
+plt.title('Linear Regression') 
+plt.xlabel('Temperature') 
+plt.ylabel('Pressure') 
+  
+plt.show() 
+# The regression line does not represent the data
+"""**Question 7:** Plot the Polynomial Regression results. 
+Study and run the following code. Is the Polynomial line a good fit?
+"""
+# Visualising the Polynomial Regression results 
+plt.scatter(X, y, color = 'blue') 
+  
+plt.plot(X, lin2.predict(poly.fit_transform(X)), color = 'red') 
+plt.title('Polynomial Regression') 
+# The Polynomial line represent better the data!
+"""**Question 8:** Let us change the degree of the Polynomial line.
+Study and run the following code using the following.
+*   degree=4
+*   degree=10
+"""
+# Fitting Polynomial Regression to the dataset 
+from sklearn.preprocessing import PolynomialFeatures 
+  
+poly = PolynomialFeatures(degree = 10) 
+X_poly = poly.fit_transform(X) 
+  
+poly.fit(X_poly, y) 
+lin2 = LinearRegression() 
+lin2.fit(X_poly, y) 
+# Visualising the Polynomial Regression results 
+plt.scatter(X, y, color = 'blue') 
+  
+plt.plot(X, lin2.predict(poly.fit_transform(X)), color = 'red') 
+plt.title('Polynomial Regression')
+"""> The degree affects the fit of our Polynomial line, if the degree is very small
+our model does not fit well to the data, if the degree is very high the model 
+overfits the data. We need to find a balance to control it.
+**Question 9:** Create a Polynomial Regression model using degree 11. Use the code 
+from the previous examples.
+"""
+# Provide your solution here
+from sklearn.preprocessing import PolynomialFeatures
+poly_reg = PolynomialFeatures(degree=11)
+X_poly = poly_reg.fit_transform(X)
+pol_reg = LinearRegression()
+pol_reg.fit(X_poly, y)
+"""**Question 10:** Predict the salary for years of experience as follows.
+*   32.5
+*   20.5
+Create a linear and Polynomial Regression prediction. 
+Study and run the following code.
+Which model is more accurate?
+"""
+# Predicting a new result with Linear Regression
+print(lin.predict([[20.5]]))
+# Predicting a new result with Polymonial Regression
+print(pol_reg.predict(poly_reg.fit_transform([[20.5]])))
+# Answer: __Polynomial Regression is a better fit model in this dataset___
+```

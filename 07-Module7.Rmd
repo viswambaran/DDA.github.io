@@ -1,0 +1,76 @@
+# Model Evaluation for Regression and Classification 
+
+## What is Model Evaluation?
+
+- It helps to find the best model that represents our data and how well the chosen model will work in the future.  
+
+- It is the process through which we quantify the quality of a systems predictions.  
+- We measure the trained model performance on the new and independent dataset.  
+
+>Generalisation refers to the models ability to adapt properly to nw and unseen data, drawn from the same distribution as the one used to create the model.  
+
+## Methods 
+
+- Train and test  
+  - Train the model on the entire dataset  
+  - Test the model on the same dataset  
+    - This shows us how well the model performed on same data  
+    - We can check if the predictions were actually correct or not  
+    
+  
+- Train - Test - Split  
+  - Test to make predictions on data that you do not use to train the model 
+  - Since our training model uses part of our dataset the testing phase is more realistic  
+    - Better simulation how a model is likely to perform on out of sample data  
+    - We have the real values of testing data so we can check how the model performed  
+    
+    
+### Issues with train-test-split 
+
+- The results may be highly bias if a subset of our dataset is skewed towards a certain group or class.  
+- This results in overfitting which we are trying to avoid. 
+
+### Cross validation 
+
+- Similar to train/test split but applied to more subsets of data.  
+- Splits data into k subsets and train on k-1 of those subsets.  
+- Use the last subset for testing  
+  - Process repeated for each subset 
+  
+
+  
+
+## Measuring Model Performance 
+
+### Variance and sensitivity 
+
+- Variance is a type of error that occurs due to a models sensitivity to small fluctations in the training set.  
+
+- High variance would cause and algorithm to model the noise in the training set aka **overfitting**.  
+
+- We need to find the balance between variance and sensitivity (low bias and low variance)  
+  - High bias can cause the algorithm to miss relationships between features and target outputs.  
+  
+### Confusion Matrix 
+
+> A Confusion Matrix is a performance measurement for a statistical learning classification problem where output can be two or more classes. It is a table with 4 different combinations of predicted and actual values.
+
+- **True Positive** is an outcome where the model correctly predicts a positive class.  
+
+- **True Negative** is an outcome where the model correctly predicts the negative class.  
+
+- **False Positive** is an outcome where the model incorrectly predicts the positive outcome.  
+
+- **False Negative** is an outcome where the model incorrectly predicts the negative outcome.   
+
+
+###Sensitivity vs Specificity  
+
+- Sensitivity is the metric that evaluates a models ability to predict true positives of each category.    
+$$
+Sensitivity = \frac{True Positives}{True Positives + False Negatives}
+$$
+- Specificity is the metric that evaluates a models ability to predict true negatives of each category.  
+$$
+Specificity = \frac{True Negatives}{True Negatives + False Positives}
+$$

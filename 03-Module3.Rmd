@@ -1,0 +1,125 @@
+# Classification with K-Nearest Neighbours (KNN)
+
+
+> The k-nearest neighbors algorithm, also known as KNN or k-NN, is a non-parametric, supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of an individual data point. While it can be used for either regression or classification problems, it is typically used as a classification algorithm, working off the assumption that similar points can be found near one another. 
+
+
+## Key information 
+
+A KNN model calculates similarity using the distance between two points on a graph. The greater the distance between the points, the less similar they are. There are multiple ways of calculating the distance between points, but the most common distance metric is just **Euclidean distance** (the distance between two points in a straight line).
+
+KNN is a **supervised learning** algorithm, meaning that the examples in the dataset must have labels assigned to them/their classes must be known. There are two other important things to know about KNN. First, KNN is a non-parametric algorithm. This means that no assumptions about the dataset are made when the model is used. Rather, the model is constructed entirely from the provided data. Second, there is no splitting of the dataset into training and test sets when using KNN. KNN makes no generalizations between a training and testing set, so all the training data is also used when the model is asked to make predictions.
+
+## Advantages and Disadvantages of using the KNN model 
+
+### Advantages 
+
+- **Easy to implement:** Given the algorithm’s simplicity and accuracy, it is one of the first classifiers that a new data scientist will learn.  
+
+- **Adapts easily:** As new training samples are added, the algorithm adjusts to account for any new data since all training data is stored into memory.  
+
+- **Few hyperparameters:** KNN only requires a k value and a distance metric, which is low when compared to other machine learning algorithms.  
+
+### Disadvantages 
+
+- **Does not scale well:** Since KNN is a lazy algorithm, it takes up more memory and data storage compared to other classifiers. This can be costly from both a time and money perspective. More memory and storage will drive up business expenses and more data can take longer to compute. While different data structures, such as Ball-Tree, have been created to address the computational inefficiencies, a different classifier may be ideal depending on the business problem.
+
+- **Curse of dimensionality:** The KNN algorithm tends to fall victim to the curse of dimensionality, which means that it doesn’t perform well with high-dimensional data inputs. This is sometimes also referred to as the peaking phenomenon (PDF, 340 MB) (link resides outside of ibm.com), where after the algorithm attains the optimal number of features, additional features increases the amount of classification errors, especially when the sample size is smaller.
+
+- **Prone to overfitting:** Due to the “curse of dimensionality”, KNN is also more prone to overfitting. While feature selection and dimensionality reduction techniques are leveraged to prevent this from occurring, the value of k can also impact the model’s behavior. Lower values of k can overfit the data, whereas higher values of k tend to “smooth out” the prediction values since it is averaging the values over a greater area, or neighborhood. However, if the value of k is too high, then it can underfit the data. 
+
+
+### Things to guide you as you choose the value of K 
+
+- As K approaches 1, your prediction becomes less stable.  
+- As your value of K increases, your prediction becomes more stable.  
+- When you start receiving an increasing number of errors, you should know you are pushing your K too far.  
+- Taking a majority vote among labels needs K to be an odd number to have a tiebreaker. 
+
+### Alternate distance metrics to Euclidean 
+
+- Minkowski distance  
+- Manhattan distance  
+- Hamming distance  
+- Cosine distance  
+
+
+### KNN code example
+```
+ **PART 2: Data Modelling**
+**Question 7:** We will need to split our dataset into feature data (X) and target 
+data (y). As discussed in class the feature data is the data that our machine 
+learning model will *learn* in order to classify according to the target variable. 
+These are:
+*  sepal.length
+*  sepal.width
+*  petal.length
+*  petal.width
+Extract the data for the first four columns and store it in a new dataframe called 
+*iris_data_feature_data*.
+"""
+# Provide your solution here
+iris_data_feature_data = 
+iris_data[['sepal.length','sepal.width','petal.length','petal.width']]
+iris_data_feature_data
+df1 = iris_data.iloc[:, 0:4]
+df1
+"""**Question 8:** Now we will need to create the *iris_data_target_data* 
+dataframe. The new dataframe will store only the target values."""
+# Provide your solution here
+iris_data_target_data = iris_data[['variety']]
+iris_data_target_data
+"""**Question 9:** Study and run the following code."""
+X_count = iris_data_feature_data.count() 
+y_count = iris_data_target_data.count()
+print("X counts")
+print(X_count)
+print("y count")
+print(y_count)
+"""> There are 150 rows for both *iris_data_feature_data* and 
+*iris_data_target_data*. Note, that we cannot proceed with modeling if the counts 
+do not match as we will receive an error! All X data should have the same number of
+rows as the y data.
+**Question 10:** As seen in class, create an X and y variable to represent 
+iris_data_feature_data and iris_data_target_data respectively. 
+Here, we just create two variables for representing X and y for our model.
+"""
+# Provide your solution here
+X = iris_data_feature_data
+y = iris_data_target_data
+"""**Question 11:** Create your KNN model and fit it using the X and y variables 
+from the previous step. Use the *KNeighborsClassifier* including 4 neighbors."""
+# Provide your solution here
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=4)
+knn.fit(X, y)
+"""> The output of this script provides some details about the default setup of the
+KNN model.
+**Question 12:** What is the *metric='minkowski'*? Look online and keep a note of 
+your findings.
+"""
+# Provide your solution here
+# The default metric is minkowski, and with p=2 is equivalent to the standard 
+Euclidean metric. 
+# More details: 
+https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClass
+ifier.html
+"""**Question 13:** Provide a script to *predict* the class of a flower with the 
+following data:
+*  sepal.length = 4.5
+*  sepal.width = 3.2
+*  petal.length = 1.1
+*  petal.width = 0.4
+"""
+# Examine the following code
+knn.predict([[4.5, 3.2, 1.1, 0.4]])
+"""**Question 14:** Print the data for row 4 and compare with the prediction of the
+previous step. Then answer the questions."""
+# Provide your solution here
+iris_data.loc[4]
+# Compare data from question 13 and data for row 4, Do they look similar? 
+# Yes! Row:4 5.0 3.6 1.4 0.2 Setosa
+# Is the prediction of question 13 good?
+# Yes, data look close to each other!
+
+```

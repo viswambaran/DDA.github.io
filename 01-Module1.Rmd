@@ -1,0 +1,37 @@
+# Introduction to Data Driven Analytics
+
+## Data Structures in Python
+
+- Lists represent a sequence of items indexed by their integer position. Lists contain zero or more elements and can contain elements of different data types or data structures (even nested objects). This makes lists powerful because they allow you to create deep and complex data structures.  
+
+- Tuples are similar to lists but are immutable; you cannot add, delete, or change items after a tuple is created. Tuples differ from lists by having fewer functions since you cannot modify them. Tuples contain zero or more elements and can contain elements of different, immutable types.  
+
+- Dictionaries use keys to associate with each value. This means that we don't keep track of the order of elements. Dictionary keys are immutable and unique, however, dictionaries are mutable; the key-value elements can be added, deleted, or changed. Dictionaries are very similar to hashmaps.  
+
+- Sets are like a dictionary but with only the keys, not the values. This means that sets are unique and not sequential (stored unordered). Sets are also mutable. Sets contain zero or more elements and can contain elements of different, immutable types.  
+
+- Dataframe is a fundamental data structure of the panda's package but its use is so widespread that we mention it here.  It organizes data into a 2-dimensional table of rows and columns, much like a spreadsheet. DataFrames are one of the most common data structures used in modern data analytics because they are a flexible and intuitive way of storing and working with data.
+
+## Structured vs Unstructured data
+
+**Structured data** is most often categorized as **quantitative data**, and it's the type of data most of us are used to working with. Think of data that fits neatly within fixed fields and columns in relational databases. Examples of structured data include tables in SQL systems with users, customers and their orders. Structured data is highly organized, thus easily understood by machine language. Working with relational databases, you can input, search, and manipulate structured data relatively quickly by using a relational database management system (RDBMS). This is the most attractive feature of structured data.  
+
+Typical characteristics include:  
+
+- Clearly defined data types  
+- A data model known as schema that define the data.  
+  - e.g. Data type (integer, string, Boolean), data format (example@email.com)
+  - has defined constraints and rules  
+    - numeric fields cant accept any string values, certain fields cant be left empty.  
+- data are stored within relational databases.  
+
+
+**Unstructured data**, typically categorized as **qualitative data**, cannot be processed and analyzed via conventional data tools and methods. Since unstructured data does not have a predefined data model, it is best managed in non-relational (NoSQL) databases. The importance of unstructured data is rapidly increasing. Recent projections indicate that unstructured data is over 80% of all enterprise data, while 95% of businesses prioritize unstructured data management.
+
+Typical characteristics include:  
+
+- Internal structure is not defined.  
+- There is no data model (schema)  
+- Examples of unstructured data include PDFs, emails, tweets etc.  
+- data are stored in NoSQL databases. 
+
